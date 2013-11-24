@@ -1,7 +1,7 @@
 <?php
 	/* SIGNUP RULES NIGGA! :P
 	 *
-	 *	Aquí se reciben los campos del formulario de registro, se encriptan las contraseñas y se envia mediante la clase usuarios al metodo
+	 *	Aquí se reciben los campos del formulario de registro, se encriptan las contraseñas y se envia mediante la clase SignUp al metodo
 	 *	createAccount() definido en basic_objects
 	 *
 	 *	P.D: Queda pendiente hacer alguna comprobación mas sobre la longitud de los campos y los valores introducidos
@@ -25,6 +25,6 @@
 
 
 
-	$account = new Usuario($nombre,$apellidos,$email,$password,$repassword,$checkbox_terminos,$fecha_registro);
+	$account = new SignUp($nombre,$apellidos,$email,$password,$repassword,$checkbox_terminos,$fecha_registro);
 	echo $account->createAccount();
 ?>

@@ -322,7 +322,7 @@
 	  *		2º Llamar al método que se quiera -> $example->createAccount();
 	  *  }
 	  */
-	class Usuario {
+	class SignUp {
 		var $nombre;
 		var $apellidos;
 		var $email;
@@ -378,6 +378,7 @@
 		//Simple singIn, nada que comentar
 		function singIn () {
 			//do something
+
 		}
 	}
 
@@ -389,18 +390,31 @@
 			echo '<div class="page-header">
 							<h1><i class="icon-user"></i>&iquest;Tienes una cuenta?<small>&iexcl;inicia sesi&oacute;n ya!</small></h1>
 						</div>
+
+						<!-- DIVS DE AVISOS -->
+					  	<div id="warningDiv" style="display:none;" class="alert alert-block alert-warning">
+							<h4>¡Error!</h4>
+							<p id="warningDivText"></p>
+						</div>
+
+						<div id="userError" style="display:none;" class="alert alert-block alert-danger">
+							<h4>&iexcl;Error!</h4>
+							Ha ocurrido un error desconocido.
+						</div>
+						<!-- FIN DIVS DE AVISOS -->
+
 						<div id="login-form">
-							<form method="post" action="#" class="form horizontal">
+							<form method="post" id="singinForm" class="form horizontal">
 								<div class="control-group">
 									<label class="control-label" for="inputEmail">Email</label>
 									<div class="controls">
-										<input type="email" id="inputEmail" placeholder="Email" name="email" disabled>
+										<input type="email" id="inputEmail" placeholder="Email" name="email">
 									</div>
 								</div>
 								<div class="control-group">
 									<label class="control-label" for="inputPassword">Password</label>
 									<div class="controls">
-										<input type="password" id="inputPassword" placeholder="Password" name="password" disabled>
+										<input type="password" id="inputPassword" placeholder="Password" name="password">
 									</div>
 								</div>
 								<div class="control-group">
@@ -409,12 +423,64 @@
 										<label class="checkbox">
 											<input type="checkbox" name="checkbox_remember">Recordar mis datos
 										</label>
-										<button type="submit" class="btn btn-inverse">Acceder</button>
+										<button type="submit" class="btn btn-inverse" id="loginButton">Acceder</button>
 									</div>
 								</div>
 							</form>
 						</div>
 					';
+		}
+	}
+
+	//CLASE DEL SIGNIN
+	class SignIn {
+		var $email;
+		var $password;
+
+		function __construct ($email='', $password='') {
+			$this->email = $email;
+			$this->password = $password;
+		}
+
+		function login () {
+			$sqlr = mysql_query("Select * from usuarios where email='$this->email' and password='$this->password'");
+	
+			while($row=mysql_fetch_array($sqlr)) {
+				$banned = $row['banned'];
+				$nombre = $row['nombre'];
+				$apellidos = $row['apellidos'];
+			}
+
+			if($banned == 1) {
+				//Cuenta bloqueada -> error
+				return 1;
+			} else if(mysql_num_rows($sqlr)!=0) {
+				//Cuenta existe
+				session_start();
+				$_SESSION['logueado'] = "SI";
+				$_SESSION['nombre_usuario'] = $nombre;
+				$_SESSION['apellidos'] = $apellidos;
+				$_SESSION['email'] = $this->email;
+
+				return 0;
+			} else {
+				//Cuenta no existe -> Error
+				return 2;
+			}
+		}
+
+		//prueba, no esta en uso!
+		function logedIn ($nombre, $apellidos) {
+			echo '<div id="loged-box">
+					<div class="page-header">
+						<h1><i class="icon-user"></i>¡Bienvenido!<small>$nombre $apellidos</small></h1>
+					</div>
+
+					<div id="test" class="alert alert-block alert-warning">
+						<h4>Pues aquí habrá algo, digo yo...</h4>
+						<p></p>
+					</div>
+				</div>';
 		}
 	}
 ?>

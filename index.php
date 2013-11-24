@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include("php_files/basic_objects.php");
 ?>
 <!DOCTYPE html>
@@ -56,10 +57,97 @@
 				voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
 			</div>
 			<div class="span4 leftColumn">
+
 				<?php
-					new Login();
+					#new Login();
 				?>
+				<!-- CUADRO UNA VEZ LOGUEADO (FALTA TERMINAR) -->
+				<?php 
+					if($_SESSION['logueado'] != "SI") {
+						echo '<div id="loged-box" style="display: none;">';
+					} else {
+						echo '<div id="loged-box">';
+					}
+				?>
+
+					<div class="page-header">
+						<h1><i class="icon-user"></i>¡Bienvenido!<small><?php echo $_SESSION['nombre_usuario'] . " " . $_SESSION['apellidos']; ?></small></h1>
+					</div>
+
+					<div id="test" class="alert alert-block alert-warning">
+						<h4>Pues aquí habrá algo, digo yo...</h4>
+						<p><a href="salir.php">Salir cutre</a></p>
+					</div>
+				</div>
+
+				<!-- CUADRO DEL LOGIN, SI NO ESTAS LOGUEADO -->
+				<?php 
+					if($_SESSION['logueado'] != "SI") {
+						echo '<div id="login-box">';
+					} else {
+						echo '<div style="display: none;" id="login-box">';
+					}
+				?>
+
+					<!-- SIGNIN LOADER -->
+						<div id="signin-loader" style="display: none;">
+							<div class="img-loader"><img src="css/images/ajax-loader.gif" alt="Loading..."></div>
+						</div>
+					<!-- SIGNIN LOADER -->
+
+					<div class="page-header">
+						<h1><i class="icon-user"></i>&iquest;Tienes una cuenta?<small>&iexcl;inicia sesi&oacute;n ya!</small></h1>
+					</div>
+
+					<!-- DIVS DE AVISOS -->
+				  	<div id="signInwarningDiv" style="display:none;" class="alert alert-block alert-warning">
+						<h4>¡Error!</h4>
+						<p id="signInwarningDivText"></p>
+					</div>
+
+					<div id="userError" style="display:none;" class="alert alert-block alert-danger">
+						<h4>&iexcl;Error!</h4>
+						Ha ocurrido un error desconocido.
+					</div>
+
+					<div id="bannedAccount-text" style="display:none;" class="alert alert-block alert-danger">
+						<h4>&iexcl;Error!</h4>
+						Lo lamentamos, pero tu cuenta ha sido bloqueada.
+					</div>
+					<!-- FIN DIVS DE AVISOS -->
+
+					<div id="login-form">
+
+						
+
+						<form method="post" id="signinForm" class="form horizontal">
+							<div class="control-group">
+								<label class="control-label" for="inputEmail">Email</label>
+								<div class="controls">
+									<input type="email" id="inputEmail" placeholder="Email" name="email">
+								</div>
+							</div>
+							<div class="control-group">
+								<label class="control-label" for="inputPassword">Password</label>
+								<div class="controls">
+									<input type="password" id="inputPassword" placeholder="Password" name="password">
+								</div>
+							</div>
+							<div class="control-group">
+								<div class="controls">
+									<a href="#modal" role="button" class="link" data-toggle="modal">S&iacute; no la tienes... &iexcl;Reg&iacute;strate ya!</a>
+									<label class="checkbox">
+										<input type="checkbox" name="checkbox_remember">Recordar mis datos
+									</label>
+								</div>
+							</div>
+						</form>
+						<button id="loginButton" class="btn btn-inverse">Acceder</button>
+					</div>
+				</div>
 			</div>
+
+
 		</div>
 
 		<!-- THUMBNAILS Y REDES SOCIALES -->
@@ -100,9 +188,9 @@
 			  <div class="modal-body">
 
 			  	<!-- DIVS DE AVISOS -->
-			  	<div id="warningDiv" style="display: none;" class="alert alert-block alert-warning">
+			  	<div id="signUpwarningDiv" style="display: none;" class="alert alert-block alert-warning">
 					<h4>¡Error!</h4>
-					<p id="warningDivText"></p>
+					<p id="signUpwarningDivText"></p>
 				</div>
 				<!-- FIN DIVS DE AVISOS -->
 
@@ -154,16 +242,19 @@
 						</div>
 						<!--<button class="btn btn-warning" type="submit">Aceptar</button>-->
 					</form>
+
+					<!-- SIGNUP LOADER -->
 					<div id="signup-loader" class="loader" style="display:none;">
 						<div class="img-loader"><img src="css/images/ajax-loader.gif" alt="Loading..."></div>
 					</div>
-					
+					<!-- SIGNUP LOADER -->
+
 				</div>
-				<div id="userSuccess" style="display:none;" class="alert alert-block alert-success">
+				<div id="signUpuserSuccess" style="display:none;" class="alert alert-block alert-success">
 					<h4>&iexcl;El usuario ha sido registrado correctamente!</h4>
 					¡Ya puedes iniciar sesión con tu email y contraseña!
 				</div>
-		        <div id="userError" style="display:none;" class="alert alert-block alert-danger">
+		        <div id="signUpuserError" style="display:none;" class="alert alert-block alert-danger">
 					<h4>&iexcl;Error!</h4>
 					Ha ocurrido un error desconocido.
 				</div>

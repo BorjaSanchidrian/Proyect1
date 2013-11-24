@@ -7,11 +7,7 @@
 	$encriptar = new InputEncrypt();
 	$password = $encriptar->encryptMd5($password);
 
-	$sqlr = mysql_query("Select * from usuarios where email='$email' and password='$password'");
-	
-	if(mysql_num_rows($sqlr)>=1) {
-		//Cuenta existe
-	} else {
-		//Cuenta no existe -> Error
-	}
+	$signIn = new SignIn($email,$password);
+	echo $signIn->login();
+
 ?>

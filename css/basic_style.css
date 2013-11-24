@@ -112,6 +112,14 @@ body {
     margin: 15px 0;
     text-align: center;
 }
+#signin-loader {
+    background: none repeat scroll 0 0 #CCC;
+    height: 39%;
+    opacity: 0.65;
+    position: absolute;
+    width: 27%;
+    border-radius: 7px;
+}
 
 /* RATING */
 

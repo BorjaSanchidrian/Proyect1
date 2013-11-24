@@ -14,6 +14,8 @@ ahora esta en 255 pero seguramente de problemas ese valor
 
 7*// Cambiar el boton de aceptar en el modal de registro (BUG!)
 
+8*// Te puedes registrar sin usar un email valido!
+
 
 
 
