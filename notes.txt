@@ -1,0 +1,22 @@
+1*// mirar cual es el valor maximo para el nombre y la descripcion en las fotos del slider
+ahora esta en 255 pero seguramente de problemas ese valor
+
+2*//Poner un timeout al slider para pasar de foto
+
+3*// Lo mismo que el 1 pero en los nombres, etc... de los usuarios
+
+4*// Puedes registrarte sin aceptar los terminos.. ->ARREGLADO
+
+5*// Al arreglar el numero 3 cambiar en la clase de los usuarios para validar que la longitud
+	introducida en los campos del formulario sea la correcta tambien ;)
+
+6*// Enviar el email en el registro
+
+7*// Cambiar el boton de aceptar en el modal de registro (BUG!)
+
+
+
+
+Notas: 
+
+	thumbnails index -> 75x100 aprox
